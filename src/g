@@ -29,3 +29,8 @@ class Val extends Component {
 }
 
 export default Val;
+
+
+
+
+{"name":"one"}

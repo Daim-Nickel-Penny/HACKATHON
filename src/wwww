@@ -1,0 +1,52 @@
+import React, { Component } from 'react'
+
+
+class Val extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      name:""
+    }
+  }
+ 
+  componentDidMount() {
+ 
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // request succesful
+                var response = xhr.responseText,
+                    json = JSON.parse(response);
+
+              this.setState({
+                isLoaded: true,
+                name: json
+               });   
+     
+            } else {
+                // error
+              this.setState({
+                isLoaded: true,
+                error: xhr.responseText
+              });
+            }
+        }
+    });
+
+    xhr.open("GET", "https://hackathonai.herokuapp.com/predict", true);
+    xhr.send();
+
+  }
+
+  render() {
+    
+    return (
+ <div>  
+ {this.state.name}</div>
+    )
+  }
+}
+
+export default Val;

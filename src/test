@@ -1,0 +1,57 @@
+import React, {Component} from 'react';
+import axios from 'axios';
+
+class Val extends Component {
+  constructor(props){
+    super(props);
+    this.state = { num: '',
+   onums: [] };
+  }
+
+  handleChange = event => {
+    this.setState({ num: event.target.value });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      num: this.state.num
+    };
+
+    axios.post(`https://hackathonai.herokuapp.com/predict`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+  }
+
+  componentDidMount() {
+    axios.get(`https://hackathonai.herokuapp.com/predict`)
+      .then(res => {
+        const onums = res.data;
+        this.setState({ onums });
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+           Number
+            <input type="number" onChange={this.handleChange} />
+          </label>
+          <button type="submit">Add</button>
+        </form>
+        <h2>
+        
+        { this.state.onums.map(onum => <h2>{onum.num}</h2>)}
+      </h2>
+      
+      </div>
+    )
+  }
+}
+
+export default Val;

@@ -1,0 +1,44 @@
+import React, {Component} from 'react';
+import axios from 'axios';
+
+const api= axios.create({
+  baseURL:`https://hackathonai.herokuapp.com/predict`
+})
+
+class Val extends Component {
+  state={
+    numbers:""
+  }
+
+  constructor(){
+    super();
+    /*try {
+      api.get('/predict').then(res=>{
+        console.log(res.data);
+      })
+      
+    } catch (error) {
+      
+    }*/
+   
+  }
+
+  sendNumber= async()=>{
+    let res= await api.post('',{"num":4})
+    console.log(res);
+  }
+
+
+  render() {
+    return (
+      <div>
+       <header>
+       <button onClick={this.sendNumber}>Send Number</button>
+       {this.state.numbers}
+       </header>
+      </div>
+    )
+  }
+}
+
+export default Val;
