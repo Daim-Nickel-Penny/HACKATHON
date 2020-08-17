@@ -1,31 +1,36 @@
 import React, { Component } from 'react'
-
+import axios from 'axios';
 
 class Val extends Component {
-  constructor() {
-    super()
-  }
-  componentWillMount() {
-    this.getData()
+ state={
+   
+   "name":''
+ }
+componentDidMount() {
+    
+
+    axios.get(`https://hackathonai.herokuapp.com/predict`)
+    .then(res => {
+      const name = res.data;
+      this.setState({ name });
+    })
+
+
+  
   }
 
-  getData() {
-   
-    var xhr = new XMLHttpRequest()
-    xhr.addEventListener('load', () => {
-      console.log(xhr.responseText)
-    })
-    xhr.open('GET', 'https://hackathonai.herokuapp.com/predict')
-    xhr.send()
-  }
 
   render() {
+
     return (
       <div>
-       
+      
       </div>
+    
+      
     )
   }
 }
 
 export default Val;
+

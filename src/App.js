@@ -1,5 +1,6 @@
 import React from 'react';
 import Val from './Val';
+import Val2 from './Val2';
 import './App.css';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className="App">
     
       <Val/>
+     <Val2/>
     </div>
   );
 }

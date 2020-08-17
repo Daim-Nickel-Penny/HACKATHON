@@ -1,0 +1,56 @@
+import React, { Component } from 'react'
+
+
+class Val extends Component {
+
+ 
+  componentDidMount() {
+    this.getData();
+    this.sendData();
+  
+  }
+
+  getData() {
+   
+    var xhr = new XMLHttpRequest()
+    xhr.addEventListener('load', () => {
+      console.log(xhr.responseText)
+    })
+    xhr.open('GET', 'https://hackathonai.herokuapp.com/predict')
+    xhr.send()
+  }
+
+  sendData(){
+    const url="https://hackathonai.herokuapp.com/posting";
+    let data={};
+    data.number=4;
+    let json=JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhr.onload = function () {
+      var users = JSON.parse(xhr.responseText);
+      if (xhr.readyState === 4 && xhr.status === "201") {
+        console.table(users);
+      } else {
+        console.error(users);
+      }
+    }
+    xhr.send(json);
+   
+  }
+
+
+
+  render() {
+    return (
+      <div>
+       
+      </div>
+    )
+  }
+}
+
+export default Val;
+

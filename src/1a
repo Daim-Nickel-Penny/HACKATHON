@@ -1,0 +1,70 @@
+import React, { Component } from 'react'
+import axios from 'axios';
+
+class Val2 extends Component {
+ state={
+    "num":''
+
+ }
+
+ getData (){
+    axios.get(`https://hackathonai.herokuapp.com/posting`)
+    .then(rest => {
+      let num = rest.data;
+      this.setState({ num });
+    })
+    console.log(this.state.num)
+ }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    axios({
+      method: 'post',
+      url: 'https://hackathonai.herokuapp.com/posting',
+      data: {
+       "num":84
+      },
+      validateStatus: (status) => {
+        return true; 
+      },
+    }).catch(error => {
+        console.log(error)  
+    }).then(response => {
+        
+    });
+
+
+
+    }
+
+
+ 
+
+    render() {
+   
+        return (
+          <div>
+           <form onSubmit={this.handleSubmit}>
+              <label>
+               Number
+                <input type="number"/>
+              </label>
+              <button type="submit">Add</button>
+            </form>
+         <form onSubmit={this.getData}>
+              <label>
+              fetch
+                <input type="number"/>
+              </label>
+              <button type="submit">Get</button>
+            </form> 
+            
+          </div>
+        
+          
+        )
+      }
+}
+
+export default Val2;
+

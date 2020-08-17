@@ -34,3 +34,12 @@ export default Val;
 
 
 {"name":"one"}
+
+\
+
+ axios.get(`https://hackathonai.herokuapp.com/posting`)
+    .then(rest => {
+      let onum = rest.data;
+      this.setState({ onum });
+    })
+    console.log(this.state.onum)
